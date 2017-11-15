@@ -47,9 +47,48 @@ function renderTweets(data) {
   });
 }
 
+function toggleForm() {
+  $('#nav-bar').on('click', '#toggle-form', function() {
+    $('.new-tweet').slideToggle("slow");
+    $('input[type=text], textarea').focus();
+  });
+}
+
 $(document).ready(function() {
 
+  toggleForm();
+
   loadTweets();
+
+  $(function() {
+          var $form = $('.new-tweet');
+          $form.on('submit', function(event) {
+            event.preventDefault();
+            var $tweet = $('input[type=text], textarea').val();
+            var $tweetLength = $tweet.length;
+            var $tweetDate = new Date();
+            if ($tweetLength <= 140 && $tweetLength > 0) {
+              var $data = $('.new-tweet :input').serialize();
+              $.ajax({
+                url: '/tweets',
+                method: 'POST',
+                data: $data,
+                success: function(data) {
+                  $('article').remove();
+                  loadTweets();
+                  $('input[type=text], textarea').val('');
+                }
+              });
+            } else if ($tweetLength > 140){
+              $('#plus-140').css({display: 'block' });
+              $('#empty-tweet').css({display: 'none'});
+
+            } else {
+              $('#empty-tweet').css({display: 'block'});
+              $('#plus-140').css({display: 'none' });
+            }
+          });
+        });
 
 });
 

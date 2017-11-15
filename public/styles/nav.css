@@ -22,3 +22,21 @@ nav > span.header {
   font-size: 2em;
   line-height: 80px;
 }
+
+nav button {
+  height: 60px;
+  width: 110px;
+  font-size: 18px;
+  margin: 10px 20px;
+  float: right;
+  border-radius: 5px;
+  border: solid black 1px;
+  background: rgba(255, 255, 255, 0.85);
+  color: rgb(0, 159, 134);
+}
+
+nav button:hover {
+  color: black;
+  background: white;
+  cursor: pointer;
+}

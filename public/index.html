@@ -32,22 +32,8 @@
 
     <script type="text/javascript" src="/scripts/app.js"></script>
 
-    <script type="text/javascript">
-      $(document).ready(function() {
-        $(function() {
-          var $form = $('.new-tweet');
-          $form.on('submit', function(event) {
-            event.preventDefault();
-            var $data = $('.new-tweet :input').serialize();
-            $.ajax({
-              url: '/tweets',
-              method: 'POST',
-              data: $data
-            });
-          });
-        });
-      });
-    </script>
+    <script type="text/javascript" src="/scripts/helpers.js"></script>
+
   </head>
 
   <body>
@@ -56,6 +42,7 @@
     <nav id="nav-bar">
       <img class="logo" src="/images/bird.png">
       <span class="header">Tweeter</span>
+      <button id="toggle-form"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Compose</button>
     </nav>
 
     <!-- Page-specific (main) content here -->
@@ -67,6 +54,8 @@
           <textarea name="text" placeholder="What are you humming about?"></textarea>
           <input type="submit" value="Tweet">
           <span class="counter">140</span>
+          <p id="plus-140">Tweet length cannot exceed 140 characters</p>
+          <p id="empty-tweet">You can't submit empty tweets dummy!</p>
         </form>
       </section>
 

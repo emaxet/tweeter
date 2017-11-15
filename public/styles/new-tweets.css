@@ -1,4 +1,5 @@
 .new-tweet {
+  display:none;
   padding: 10px;
   background: #eee;
   border-radius: 5px;
@@ -27,4 +28,16 @@ span.counter {
 
 .over-length-limit {
   color: red;
+}
+
+#plus-140 {
+  color:red;
+  font-size: 0.75em;
+  display: none;
+}
+
+#empty-tweet {
+  color: red;
+  font-size: 0.75em;
+  display: none;
 }
