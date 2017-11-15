@@ -54,6 +54,11 @@ function toggleForm() {
   });
 }
 
+function resetNewTweetForm() {
+  $('input[type=text], textarea').val('');
+  $('.counter').text(140);
+}
+
 $(document).ready(function() {
 
   toggleForm();
@@ -61,14 +66,12 @@ $(document).ready(function() {
   loadTweets();
 
   $(function() {
-          var $form = $('.new-tweet');
+          const $form = $('.new-tweet');
           $form.on('submit', function(event) {
             event.preventDefault();
-            var $tweet = $('input[type=text], textarea').val();
-            var $tweetLength = $tweet.length;
-            var $tweetDate = new Date();
+            const $tweetLength = 140 - +$('.counter').text();
             if ($tweetLength <= 140 && $tweetLength > 0) {
-              var $data = $('.new-tweet :input').serialize();
+              const $data = $('.new-tweet :input').serialize();
               $.ajax({
                 url: '/tweets',
                 method: 'POST',
@@ -76,7 +79,7 @@ $(document).ready(function() {
                 success: function(data) {
                   $('article').remove();
                   loadTweets();
-                  $('input[type=text], textarea').val('');
+                  resetNewTweetForm();
                 }
               });
             } else if ($tweetLength > 140){
@@ -92,11 +95,3 @@ $(document).ready(function() {
 
 });
 
-
-
-
-/*
- * Client-side JS logic goes here
- * jQuery is already loaded
- * Reminder: Use (and do all your DOM work in) jQuery's document ready function
- */
