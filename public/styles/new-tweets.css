@@ -1,0 +1,30 @@
+.new-tweet {
+  padding: 10px;
+  background: #eee;
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
+.new-tweet > h2 {
+  border-bottom: 1px solid black;
+}
+
+.new-tweet > form > textarea {
+  display: block;
+  width: 100%;
+  padding: 5px;
+}
+
+.new-tweet > form > input[type=submit] {
+  display: inline-block;
+  margin-top: 5px;
+}
+
+span.counter {
+  float:right;
+  line-height: 35px;
+}
+
+.over-length-limit {
+  color: red;
+}

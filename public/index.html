@@ -7,26 +7,73 @@
     <!-- External CSS -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
 
+    <!-- Google Fonts API -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,700" rel="stylesheet">
+
     <!-- App CSS -->
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+
+    <!-- Nav CSS -->
+    <link rel="stylesheet" href="/styles/nav.css" type ="text/css" />
+
+    <!-- New Tweet Form -->
+    <link rel="stylesheet" href="/styles/new-tweets.css" type="text/css" />
+
+    <link rel="stylesheet" href="/styles/tweet-feed.css" type="text/css" />
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
 
-    <!-- App JS -->
+    <script type="text/javascript" src="/scripts/composer-char-counter.js"></script>
+
+    <script type="text/javascript" src="/scripts/new-tweet.js"></script>
+
     <script type="text/javascript" src="/scripts/app.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $(function() {
+          var $form = $('.new-tweet');
+          $form.on('submit', function(event) {
+            event.preventDefault();
+            var $data = $('.new-tweet :input').serialize();
+            $.ajax({
+              url: '/tweets',
+              method: 'POST',
+              data: $data
+            });
+          });
+        });
+      });
+    </script>
   </head>
 
   <body>
 
     <!-- Top nav bar (fixed) -->
     <nav id="nav-bar">
-      <img class="logo" src="/images/bird.png" width="80px" height="80px">
+      <img class="logo" src="/images/bird.png">
       <span class="header">Tweeter</span>
     </nav>
 
     <!-- Page-specific (main) content here -->
     <main class="container">
+
+      <section class="new-tweet">
+        <h2>Compose Tweet</h2>
+        <form action = "/tweets" method="POST">
+          <textarea name="text" placeholder="What are you humming about?"></textarea>
+          <input type="submit" value="Tweet">
+          <span class="counter">140</span>
+        </form>
+      </section>
+
+      <section class="tweet-feed">
+
+      </section>
+
     </main>
 
   </body>
