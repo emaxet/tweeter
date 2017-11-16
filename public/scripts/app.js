@@ -48,7 +48,7 @@ function renderTweets(data) {
 }
 
 function toggleForm() {
-  $('#nav-bar').on('click', '#toggle-form', function() {
+  $('.nav-bar').on('click', '.toggle-form', function() {
     $('.new-tweet').slideToggle("slow");
     $('input[type=text], textarea').focus();
   });
@@ -57,6 +57,7 @@ function toggleForm() {
 function resetNewTweetForm() {
   $('input[type=text], textarea').val('');
   $('.counter').text(140);
+  $('.error').css({display: 'none'});
 }
 
 $(document).ready(function() {
@@ -83,11 +84,11 @@ $(document).ready(function() {
           }
         });
       } else if ($tweetLength > 140){
-        $('#plus-140').css({display: 'block' });
-        $('#empty-tweet').css({display: 'none'});
+        $('.plus-140').css({display: 'block' });
+        $('.empty-tweet').css({display: 'none'});
       } else {
-        $('#empty-tweet').css({display: 'block'});
-        $('#plus-140').css({display: 'none' });
+        $('.empty-tweet').css({display: 'block'});
+        $('.plus-140').css({display: 'none' });
       }
     });
   });
