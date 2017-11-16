@@ -10,7 +10,7 @@ $(document).ready(function() {
     const $form = $('.new-tweet');
     $form.on('submit', function(event) {
       event.preventDefault();
-      const $tweetLength = 140 - +$('.counter').text();
+      const $tweetLength = 140 - Number($('.counter').text());
       if ($tweetLength <= 140 && $tweetLength > 0) {
         const $data = $('.new-tweet :input').serialize();
         $.ajax({
@@ -32,5 +32,6 @@ $(document).ready(function() {
       }
     });
   });
+
 });
 

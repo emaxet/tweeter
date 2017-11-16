@@ -30,20 +30,20 @@ function createTweetElement(data) {
   return $tweet;
 }
 
-function loadTweets() {
-    $.ajax({
-      url: '/tweets',
-      method: 'GET',
-      dataType: 'json',
-      success: function(data) {
-        renderTweets(data);
-      }
-    });
-  }
-
 function renderTweets(data) {
   data.forEach(function(tweet) {
     createTweetElement(tweet);
+  });
+}
+
+function loadTweets() {
+  $.ajax({
+    url: '/tweets',
+    method: 'GET',
+    dataType: 'json',
+    success: function(data) {
+      renderTweets(data);
+    }
   });
 }
 
