@@ -7,7 +7,7 @@ function tweetLike() {
       url: `/tweets/${$id}/like`,
       method: 'POST',
       success: (data) => {
-
+        alert(data);
       }
     })
   });

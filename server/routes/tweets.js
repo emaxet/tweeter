@@ -49,12 +49,8 @@ module.exports = function(DataHelpers) {
     const tweetID = req.params.id;
     const tweet = db.collection('tweets').findOne({ _id: new ObjectId(tweetID) });
     tweet.then(function(tweet) {
-       db.collection('tweets').updateOne({_id: new ObjectId(tweetID)}, { $set: { 'likes': tweet.likes + 1 } });
-       console.log(tweet);
-
+       db.collection('tweets').updateOne({ _id: new ObjectId(tweetID)}, { $set: { 'likes': tweet.likes + 1 } }) ;
     });
-    console.log(tweet);
-
   });
 
   return tweetsRoutes;

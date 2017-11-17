@@ -6,6 +6,7 @@ function createTweetElement(data) {
   let timeStamp = new Date(data.created_at);
   let avatar    = data.user.avatars.small;
   let id        = data._id;
+  let likes     = data.likes;
 
 
   var $tweet = $('section.tweet-feed').append(`
@@ -21,9 +22,10 @@ function createTweetElement(data) {
           <footer>
             <p>${timeStamp}</p>
             <div>
+              <p class="like-count">${likes}</p>
+              <i class="fa fa-heart" aria-hidden="true"></i>
               <i class="fa fa-flag" aria-hidden="true"></i>
               <i class="fa fa-retweet" aria-hidden="true"></i>
-              <i class="fa fa-heart" aria-hidden="true"></i>
               <span class="tweetId hidden">${id}</span>
             </div>
           </footer>
