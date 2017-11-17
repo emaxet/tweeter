@@ -47,13 +47,13 @@ module.exports = function(DataHelpers) {
   tweetsRoutes.post("/:id/like", function(req, res) {
     const db = mongoUtil.getDb();
     const tweetID = req.params.id;
-    const tweet = db.collection('tweets').findOne({ _id: new ObjectId(tweetID) });
+    let tweet = db.collection('tweets').findOne({ _id: new ObjectId(tweetID) });
     tweet.then(function(tweet) {
-       db.collection('tweets').updateOne({ _id: new ObjectId(tweetID)}, { $set: { 'likes': tweet.likes + 1 } }) ;
-       res.status(200);
-       res.send(JSON.stringify(tweet));
+    db.collection('tweets').updateOne({ _id: new ObjectId(tweetID)}, { $set: { 'likes': tweet.likes + 1 } });
+      const tweetLikes = tweet.likes + 1;
+      res.status(200);
+      res.send(JSON.stringify(tweetLikes));
     });
-
   });
 
   return tweetsRoutes;
