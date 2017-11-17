@@ -2,6 +2,7 @@
   border-radius: 5px;
   border: 1px lightgrey solid;
   margin-bottom: 10px;
+  overflow-wrap: break-word;
 }
 
 .tweet header {
@@ -70,4 +71,12 @@
 
 .tweet:hover footer div {
   display: block;
+}
+
+.likedTweet {
+  color: red;
+}
+
+.hidden {
+  display:none;
 }

@@ -2,6 +2,8 @@
 
 const userHelper    = require("../lib/util/user-helper");
 const express       = require('express');
+const mongoUtil     = require("../lib/util/mongo-connection");
+const ObjectId      = require('mongodb').ObjectID;
 
 const tweetsRoutes  = express.Router();
 
@@ -29,7 +31,8 @@ module.exports = function(DataHelpers) {
       content: {
         text: req.body.text
       },
-      created_at: Date.now()
+      created_at: Date.now(),
+      likes: 0
     };
 
     DataHelpers.saveTweet(tweet, (err) => {
@@ -39,6 +42,19 @@ module.exports = function(DataHelpers) {
         res.status(201).send();
       }
     });
+  });
+
+  tweetsRoutes.post("/:id/like", function(req, res) {
+    const db = mongoUtil.getDb();
+    const tweetID = req.params.id;
+    const tweet = db.collection('tweets').findOne({ _id: new ObjectId(tweetID) });
+    tweet.then(function(tweet) {
+       db.collection('tweets').updateOne({_id: new ObjectId(tweetID)}, { $set: { 'likes': tweet.likes + 1 } });
+       console.log(tweet);
+
+    });
+    console.log(tweet);
+
   });
 
   return tweetsRoutes;

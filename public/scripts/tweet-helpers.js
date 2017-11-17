@@ -1,10 +1,11 @@
 
 function createTweetElement(data) {
-  let name = data.user.name;
-  let handle = data.user.handle;
-  let content = data.content.text;
+  let name      = data.user.name;
+  let handle    = data.user.handle;
+  let content   = data.content.text;
   let timeStamp = new Date(data.created_at);
-  let avatar = data.user.avatars.small;
+  let avatar    = data.user.avatars.small;
+  let id        = data._id;
 
 
   var $tweet = $('section.tweet-feed').append(`
@@ -23,10 +24,12 @@ function createTweetElement(data) {
               <i class="fa fa-flag" aria-hidden="true"></i>
               <i class="fa fa-retweet" aria-hidden="true"></i>
               <i class="fa fa-heart" aria-hidden="true"></i>
+              <span class="tweetId hidden">${id}</span>
             </div>
           </footer>
         </article>`);
 
+  console.log(id);
   return $tweet;
 }
 
@@ -43,6 +46,7 @@ function loadTweets() {
     dataType: 'json',
     success: function(data) {
       renderTweets(data);
+      tweetLike();
     }
   });
 }
