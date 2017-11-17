@@ -10,7 +10,7 @@ function createTweetElement(data) {
 
 
   var $tweet = $('section.tweet-feed').append(`
-    <article class="tweet">
+    <article class="tweet" data-id="${id}">
           <header>
             <img src="${avatar}">
             <h2>${name}</h2>
@@ -26,7 +26,6 @@ function createTweetElement(data) {
               <i class="fa fa-heart" aria-hidden="true"></i>
               <i class="fa fa-flag" aria-hidden="true"></i>
               <i class="fa fa-retweet" aria-hidden="true"></i>
-              <span class="tweetId hidden">${id}</span>
             </div>
           </footer>
         </article>`);
