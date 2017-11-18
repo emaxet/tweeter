@@ -1,0 +1,53 @@
+.form-container {
+  margin-top: 100px
+  width: 500px;
+  text-align: center;
+  margin-top: 200px;
+}
+
+.form-container h2 {
+  margin-bottom: 0;
+}
+
+.nav-form {
+  display: block;
+  width: 300px;
+  line-height: 75px;
+  margin: 0 auto;
+}
+
+.nav-form input {
+  font-size: 10px;
+  line-height: 20px;
+  border-radius: 5px;
+  border: solid black 1px;
+  padding-left: 5px;
+}
+
+.nav-form button {
+  font-size: 10px;
+  line-height: 20px;
+  border-radius: 5px;
+  font-weight: 700px;
+  border: solid black 1px;
+  background: rgba(255, 255, 255, 0.85);
+  color: rgb(0, 159, 134);
+}
+
+.nav-form button:hover {
+  color: black;
+  background: white;
+  cursor: pointer;
+}
+
+nav a {
+  text-decoration: none;
+  position: relative;
+  line-height: 55px;
+  text-align: center;
+}
+
+.error-message {
+  color: red;
+  font-size: 10px;
+}

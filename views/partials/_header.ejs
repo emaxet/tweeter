@@ -23,6 +23,8 @@
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
+    <link rel="stylesheet" type="text/css" href="/styles/login_register.css" />
+
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
 
@@ -34,41 +36,31 @@
 
     <script type="text/javascript" src="/scripts/tweet-likes.js"></script>
 
+    <script type="text/javascript" src="/scripts/button-links.js"></script>
+
   </head>
 
   <body>
 
-    <!-- Top nav bar (fixed) -->
+   <!-- Top nav bar (fixed) -->
     <nav class="nav-bar">
       <img class="logo" src="/images/bird.png">
       <span class="header">Tweeter</span>
-      <button class="toggle-form"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Compose</button>
-      <form class="login-register">
-        <input class="email-input" type="email" name="email" placeholder="email@example.com">
-        <input type="pass-input" name="password" type="password" placeholder="password">
-        <button class="user-submit">Get In There</button>
-      </form>
+
+        <% if(userID) { %>
+
+          <form action="/logout?_method=DELETE" method="POST">
+            <input type="hidden">
+            <button class="nav-button logout">Logout</button>
+          </form>
+          <button class="nav-button toggle-form"><i class="fa fa-pencil-square-o" aria-hiddtrue"></i> Compose</button>
+
+
+        <% } else { %>
+
+          <a class="nav-button register" href="/register">Register</a>
+          <a class="nav-button login" href="/login">Login</a>
+
+        <% } %>
+
     </nav>
-
-    <!-- Page-specific (main) content here -->
-    <main class="container">
-
-      <section class="new-tweet">
-        <h2>Compose Tweet</h2>
-        <form action = "/tweets" method="POST">
-          <textarea name="text" placeholder="What are you humming about?"></textarea>
-          <input type="submit" value="Tweet">
-          <span class="counter">140</span>
-          <p class="plus-140 error">Tweet length cannot exceed 140 characters</p>
-          <p class="empty-tweet error">You can't submit empty tweets dummy!</p>
-        </form>
-      </section>
-
-      <section class="tweet-feed">
-
-      </section>
-
-    </main>
-
-  </body>
-</html>

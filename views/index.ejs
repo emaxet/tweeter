@@ -1,0 +1,24 @@
+<% include partials/_header %>
+
+    <!-- Page-specific (main) content here -->
+    <main class="container">
+
+      <section class="new-tweet">
+        <h2>Compose Tweet</h2>
+        <form action = "/tweets" method="POST">
+          <textarea name="text" placeholder="What are you humming about?"></textarea>
+          <input type="submit" value="Tweet">
+          <span class="counter">140</span>
+          <p class="plus-140 error">Tweet length cannot exceed 140 characters</p>
+          <p class="empty-tweet error">You can't submit empty tweets dummy!</p>
+        </form>
+      </section>
+
+      <section class="tweet-feed">
+
+      </section>
+
+    </main>
+
+  </body>
+</html>

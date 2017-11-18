@@ -23,8 +23,7 @@ nav > span.header {
   line-height: 80px;
 }
 
-nav .toggle-form {
-  display: none;
+nav .nav-button {
   height: 60px;
   width: 110px;
   font-size: 18px;
@@ -36,38 +35,7 @@ nav .toggle-form {
   color: rgb(0, 159, 134);
 }
 
-nav .toggle-form:hover {
-  color: black;
-  background: white;
-  cursor: pointer;
-}
-
-nav .login-register {
-  width: 500px;
-  float: right;
-  text-align: right;
-  line-height: 75px;
-}
-
-nav .login-register input {
-  font-size: 10px;
-  line-height: 20px;
-  border-radius: 5px;
-  border: solid black 1px;
-  padding-left: 5px;
-}
-
-nav .login-register button {
-  font-size: 10px;
-  line-height: 20px;
-  border-radius: 5px;
-  font-weight: 700px;
-  border: solid black 1px;
-  background: rgba(255, 255, 255, 0.85);
-  color: rgb(0, 159, 134);
-}
-
-nav .login-register button:hover {
+nav .nav-button:hover {
   color: black;
   background: white;
   cursor: pointer;

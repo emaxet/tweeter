@@ -1,0 +1,19 @@
+<% include partials/_header %>
+
+<div class="form-container">
+
+  <h2>Login To Your Account</h2>
+
+  <form class="nav-form login-form" action="/login?_method=PUT" method="POST">
+    <input type="text" name="username" placeholder="username">
+    <input type="password" name="password" placeholder="password">
+    <button>Submit</button>
+  </form>
+
+  <% if (noMatch === true) { %>
+
+    <p class="error-message">Your username or password are incorrect.</p>
+
+  <% } %>
+
+</div>
