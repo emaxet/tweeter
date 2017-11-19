@@ -1,16 +1,20 @@
 # Tweeter Project
 
-Tweeter is a simple, single-page Twitter clone.
+Tweeter is a simple, single page Twitter clone that allows you to connect with your friends in a clean, distraction-free setting.
 
-This repository is the starter code for the project: Students will fork and clone this repository, then build upon it to practice their HTML, CSS, JS, jQuery and AJAX front-end skills, and their Node, Express and MongoDB back-end skills.
+## Final Product
 
+!["Screenshot of the tweeter feed"](https://github.com/emaxet/tweeter/blob/master/docs/tweet-feed.png)
+!["Screenshot of the compose tweet box"](https://github.com/emaxet/tweeter/blob/master/docs/compose-tweet.png)
+!["Screenshot of a liked tweet"](https://github.com/emaxet/tweeter/blob/master/docs/like-tweet.png)
 
 ## Getting Started
 
 1. Fork this repository, then clone your fork of this repository.
-2. Install dependencies using the `npm install` command.
-3. Start the web server using the `npm run local` command. The app will be served at <http://localhost:8080/>.
-4. Go to <http://localhost:8080/> in your browser.
+2. Make sure that you have installed mongodb installed on your operating system.
+3. Install dependencies using the `npm install` command.
+4. Start the web server using the `npm run local` command. The app will be served at <http://localhost:8080/>.
+5. Go to <http://localhost:8080/> in your browser.
 
 ## Dependencies
 
