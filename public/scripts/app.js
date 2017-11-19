@@ -1,4 +1,4 @@
-  $(document).ready(function() {
+$(document).ready(function() {
 
   // All functions called are found in ./tweet-helpers.js
 
@@ -7,13 +7,15 @@
   loadTweets();
 
   $(function() {
+
     const $form = $('.new-tweet');
     $form.on('submit', function(event) {
       event.preventDefault();
       const $tweetLength = 140 - Number($('.counter').text());
+
       if ($tweetLength <= 140 && $tweetLength > 0) {
         const $data = $('.new-tweet :input').serialize();
-        console.log($data);
+
         $.ajax({
           url: '/tweets',
           method: 'POST',
@@ -24,6 +26,7 @@
             resetNewTweetForm();
           }
         });
+
       } else if ($tweetLength > 140){
         $('.plus-140').css({display: 'block' });
         $('.empty-tweet').css({display: 'none'});
@@ -32,6 +35,7 @@
         $('.plus-140').css({display: 'none' });
       }
     });
+
   });
 
 });

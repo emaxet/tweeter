@@ -1,22 +1,23 @@
 "use strict";
+/*eslint camelcase: 0*/
 
-// Basic express setup:
+const PORT            = 8080;
+const express         = require("express");
+const bodyParser      = require("body-parser");
+const mongoUtil       = require("./lib/util/mongo-connection.js");
+const cookieSession   = require('cookie-session');
+const userHelper      = require('./lib/util/user-helper.js');
+const methodOverride  = require('method-override');
+const app             = express();
 
-const PORT          = 8080;
-const express       = require("express");
-const bodyParser    = require("body-parser");
-const app           = express();
-const mongoUtil     = require("./lib/util/mongo-connection.js");
-const cookieSession = require('cookie-session');
-const userHelper    = require('./lib/util/user-helper.js');
-var methodOverride  = require('method-override')
+// MIDDLEWARE
 
 app.set("view engine", "ejs");
 app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(cookieSession({
-  name: "session" ,
+  name: "session",
   keys: ['key1']
 }));
 app.use((req, res, next) => {
@@ -26,12 +27,20 @@ app.use((req, res, next) => {
   next();
 });
 
+// CONNECT TO APP DATABASE
 
 mongoUtil.connectToServer((err) => {
 
-  if (err) throw err;
+  if (err) {
+    throw err;
+  }
 
-  const db = mongoUtil.getDb();
+  const db              = mongoUtil.getDb();
+  const DataHelpers     = require("./lib/data-helpers.js")(db);
+  const tweetsRoutes    = require("./routes/tweets")(DataHelpers);
+  app.use("/tweets", tweetsRoutes);
+
+  // ROUTES
 
   app.get("/", (req, res) => {
     res.render("index");
@@ -45,17 +54,13 @@ mongoUtil.connectToServer((err) => {
     res.render("login");
   });
 
-  const DataHelpers = require("./lib/data-helpers.js")(db);
-
-  const tweetsRoutes = require("./routes/tweets")(DataHelpers);
-
-  // Register a new user
+  // REGISTER
 
   app.put("/register", (req, res) => {
 
     db.collection('users').find( { name: req.body.username } ).toArray((err, userArray) => {
       if(userArray.length) {
-        res.render("register", { nameTaken: true })
+        res.render("register", { nameTaken: true });
       } else {
         req.session.user_id = Math.floor(Math.random() * 1000000) + 1;
         let newUser  = {};
@@ -63,7 +68,7 @@ mongoUtil.connectToServer((err) => {
           'name': req.body.username,
           'password': req.body.password,
           'userID': req.session.user_id
-        }
+        };
         newUser = userHelper.generateRandomUser(userInfo);
         db.collection('users').insert(newUser);
         res.redirect("/");
@@ -72,30 +77,27 @@ mongoUtil.connectToServer((err) => {
     });
   });
 
-  // User login
+  // LOGIN
 
   app.put("/login", (req, res) => {
-     db.collection('users').find( { name: req.body.username } ).toArray((err, userArray) => {
+    db.collection('users').find( { name: req.body.username } ).toArray((err, userArray) => {
       if(userArray.length) {
         if(userArray[0].name === req.body.username && userArray[0].password === req.body.password) {
           req.session.user_id = userArray[0].userID;
-          res.redirect("/")
+          res.redirect("/");
         } else {
-          res.render("login", { noMatch : true});
+          res.render("login", { noMatch: true});
         }
       } else {
-        res.render("login", { noMatch : true });
+        res.render("login", { noMatch: true });
       }
     });
   });
 
-  app.delete("/logout", (req, res) => {
-      req.session = null
-      res.redirect("/");
+  app.post("/logout", (req, res) => {
+    req.session = null;
+    res.redirect("/");
   });
-
-  app.use("/tweets", tweetsRoutes);
-
 
 });
 

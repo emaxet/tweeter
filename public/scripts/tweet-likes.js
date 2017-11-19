@@ -1,9 +1,3 @@
-
-// function liveUpdateLikeCount(data) {
-//   const dataObject = JSON.parse(data);
-//   return dataObject;
-// }
-
 function tweetLike() {
   $('.fa-heart').on('click', (e) => {
     const $likes = $(e.target).siblings('p');
@@ -16,7 +10,7 @@ function tweetLike() {
         $likes.text(`${dataObject}`);
         $(e.target).toggleClass('likedTweet');
       }
-    })
+    });
   });
 }
 

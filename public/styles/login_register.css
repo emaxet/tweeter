@@ -1,22 +1,22 @@
-.form-container {
+.user-container {
   margin-top: 100px
   width: 500px;
   text-align: center;
   margin-top: 200px;
 }
 
-.form-container h2 {
+.user-container h2 {
   margin-bottom: 0;
 }
 
-.nav-form {
+.user-validation-form {
   display: block;
   width: 300px;
   line-height: 75px;
   margin: 0 auto;
 }
 
-.nav-form input {
+.user-validation-form input {
   font-size: 10px;
   line-height: 20px;
   border-radius: 5px;
@@ -24,7 +24,7 @@
   padding-left: 5px;
 }
 
-.nav-form button {
+.user-validation-form button {
   font-size: 10px;
   line-height: 20px;
   border-radius: 5px;
@@ -34,7 +34,7 @@
   color: rgb(0, 159, 134);
 }
 
-.nav-form button:hover {
+.user-validation-form button:hover {
   color: black;
   background: white;
   cursor: pointer;
