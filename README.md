@@ -14,7 +14,7 @@ Tweeter is a simple, single page Twitter clone that allows you to connect with y
 2. Make sure that you have installed mongodb installed on your operating system.
 3. Install dependencies using the `npm install` command.
 4. Start the web server using the `npm run local` command. The app will be served at <http://localhost:8080/>.
-5. Go to <http://localhost:8080/> in your browser.
+5. Go to <http://localhosgitt:8080/> in your browser.
 
 ## Dependencies
 
