@@ -41,7 +41,7 @@ module.exports = {
       password: password,
       name: userName,
       handle: userHandle,
-      avatars: avatars
+      avatars: avatars,
     };
   }
 };

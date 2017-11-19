@@ -34,14 +34,15 @@ module.exports = function(DataHelpers) {
     const db = mongoUtil.getDb();
     const userDoc = db.collection('users').find({ userID: req.session.user_id }).toArray().then((userDoc) => {
       if(userDoc[0].userID === req.session.user_id) {
-        console.log("match");
         const tweet = {
           user: userDoc[0],
           content: {
             text: req.body.text
           },
           created_at: Date.now(),
-          likes: 0
+          created_by: userDoc[0].userID,
+          likes: 0,
+          liked: []
         };
         console.log(tweet);
         DataHelpers.saveTweet(tweet, (err) => {
@@ -57,35 +58,41 @@ module.exports = function(DataHelpers) {
     });
   });
 
-
-      // const user = req.body.user ? req.body.user : userHelper.generateRandomUser();
-      // const tweet = {
-      //   user: user,
-      //   content: {
-      //     text: req.body.text
-      //   },
-      //   created_at: Date.now(),
-      //   likes: 0
-      // };
-
-      // DataHelpers.saveTweet(tweet, (err) => {
-      //   if (err) {
-      //     res.status(500).json({ error: err.message });
-      //   } else {
-      //     res.status(201).send();
-      //   }
-      // });
+  // if user is logged in....
 
   tweetsRoutes.post("/:id/like", function(req, res) {
-    const db = mongoUtil.getDb();
-    const tweetID = req.params.id;
-    let tweet = db.collection('tweets').findOne({ _id: new ObjectId(tweetID) });
-    tweet.then(function(tweet) {
-    db.collection('tweets').updateOne({ _id: new ObjectId(tweetID)}, { $set: { 'likes': tweet.likes + 1 } });
-      const tweetLikes = tweet.likes + 1;
-      res.status(200);
-      res.send(JSON.stringify(tweetLikes));
-    });
+
+    if (req.session.user_id) {
+
+      const db = mongoUtil.getDb(); //get tweeter db
+      const tweetID = req.params.id; //tweet id
+      let tweet = db.collection('tweets').findOne({ _id: new ObjectId(tweetID) }); // find the tweet that matches the db id
+      tweet.then(function(tweet) {
+
+        if (tweet.created_by === req.session.user_id) {
+          res.status(401);
+          res.send("You can't like your own tweets!");
+        } else {
+
+          if (tweet.liked.indexOf(req.session.user_id) > -1) {
+            db.collection('tweets').updateOne({ _id: new ObjectId(tweetID)}, { $pull: { 'liked': req.session.user_id } });
+            db.collection('tweets').updateOne({ _id: new ObjectId(tweetID)}, { $set: { 'likes': tweet.likes -  1 } });
+            const tweetLikes = tweet.likes -1;
+            res.status(200);
+            res.send(JSON.stringify(tweetLikes));
+          } else {
+            db.collection('tweets').updateOne({ _id: new ObjectId(tweetID)}, { $push: { 'liked': req.session.user_id } });
+            db.collection('tweets').updateOne({ _id: new ObjectId(tweetID)}, { $set: { 'likes': tweet.likes + 1 } });
+            const tweetLikes = tweet.likes + 1;
+            res.status(200);
+            res.send(JSON.stringify(tweetLikes));
+          }
+        }
+      });
+    } else {
+      res.status(401);
+      res.send("You aren't authorized to perform this action");
+    }
   });
 
   return tweetsRoutes;

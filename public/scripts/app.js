@@ -1,22 +1,5 @@
   $(document).ready(function() {
 
-
-// Register new user
-  // $(function() {
-  //     const $registerForm = $('.register-form');
-  //     $registerForm.on('submit', function(e) {
-  //       e.preventDefault();
-  //       const $data = $('.register-form :input').serialize();
-  //       $.ajax({
-  //         url: "/register",
-  //         method: "PUT",
-  //         data: $data
-  //       });
-  //     });
-  // });
-
-
-
   // All functions called are found in ./tweet-helpers.js
 
   toggleForm();
