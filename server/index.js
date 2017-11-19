@@ -7,7 +7,7 @@ const bodyParser      = require("body-parser");
 const mongoUtil       = require("./lib/util/mongo-connection.js");
 const cookieSession   = require('cookie-session');
 const userHelper      = require('./lib/util/user-helper.js');
-const methodOverride  = require('method-override');zz
+const methodOverride  = require('method-override');
 const app             = express();
 
 // MIDDLEWARE
