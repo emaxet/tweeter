@@ -16,8 +16,12 @@ This repository is the starter code for the project: Students will fork and clon
 
 "body-parser": "^1.15.2",
 "chance": "^1.0.2",
+"cookie-session": "^2.0.0-beta.3",
+"ejs": "^2.5.7",
 "express": "^4.13.4",
 "md5": "^2.1.0",
+"method-override": "^2.3.10",
 "mongodb": "^2.2.33"
+
 
 
